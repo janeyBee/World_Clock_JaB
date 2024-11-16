@@ -1,28 +1,47 @@
 function updateTime() {
   let visbyElement = document.querySelector('#visby');
-  let visbyDateElement = visbyElement.querySelector(' .date');
-  let visbyTimeElement = visbyElement.querySelector(' .time');
-  let visbyTime = moment().tz('Europe/Stockholm');
-  visbyDateElement.innerHTML = `${visbyTime.format('dddd MMMM Do YYYY')}`;
-  visbyTimeElement.innerHTML = `${visbyTime.format('h:mm:ss')}
+  if (visbyElement) {
+    let visbyDateElement = visbyElement.querySelector(' .date');
+    let visbyTimeElement = visbyElement.querySelector(' .time');
+    let visbyTime = moment().tz('Europe/Stockholm');
+    visbyDateElement.innerHTML = `${visbyTime.format('dddd MMMM Do YYYY')}`;
+    visbyTimeElement.innerHTML = `${visbyTime.format('h:mm:ss')}
 <small>${visbyTime.format('A')}</small>`;
+  }
 
   let santiagoElement = document.querySelector('#santiago');
-  let santiagoDateElement = santiagoElement.querySelector(' .date');
-  let santiagoTimeElement = santiagoElement.querySelector(' .time');
-  let santiagoTime = moment().tz('America/Santiago');
-  santiagoDateElement.innerHTML = `${santiagoTime.format('dddd MMMM Do YYYY')}`;
-  santiagoTimeElement.innerHTML = `${santiagoTime.format('h:mm:ss')}
+  if (santiagoElement) {
+    let santiagoDateElement = santiagoElement.querySelector(' .date');
+    let santiagoTimeElement = santiagoElement.querySelector(' .time');
+    let santiagoTime = moment().tz('America/Santiago');
+    santiagoDateElement.innerHTML = `${santiagoTime.format(
+      'dddd MMMM Do YYYY'
+    )}`;
+    santiagoTimeElement.innerHTML = `${santiagoTime.format('h:mm:ss')}
 <small>${santiagoTime.format('A')}</small>`;
+  }
+}
 
-  let serpinsElement = document.querySelector('#serpins');
-  let serpinsDateElement = serpinsElement.querySelector(' .date');
-  let serpinsTimeElement = serpinsElement.querySelector(' .time');
-  let serpinsTime = moment().tz('Europe/Lisbon');
-  serpinsDateElement.innerHTML = `${serpinsTime.format('dddd MMMM Do YYYY')}`;
-  serpinsTimeElement.innerHTML = `${serpinsTime.format('h:mm:ss')}
-<small>${serpinsTime.format('A')}</small>`;
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
+  let cityName = cityTimeZone.replace('_', ' ').split('/')[1];
+  let cityTime = moment().tz(cityTimeZone);
+  let citiesElement = document.querySelector('#cities');
+  citiesElement.innerHTML = `
+  <div class="city">
+        <div>
+          <h2>${cityName}</h2>
+          <div class="date">${cityTime.format('dddd MMMM Do YYYY')}</div>
+        </div>
+        <div class="time">${cityTime.format(
+          'h:mm:ss'
+        )} <small>${cityTime.format('A')}</small></div>
+      </div>
+      `;
 }
 
 updateTime();
 setInterval(updateTime, 1000);
+
+let citiesSelectElement = document.querySelector('#city');
+citiesSelectElement.addEventListener('change', updateCity);
