@@ -66,9 +66,9 @@ footer {
   text-align: center;
   font-family: monospace;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 footer a {
-  color: pink;
+  color: rgb(244, 59, 90);
 }
