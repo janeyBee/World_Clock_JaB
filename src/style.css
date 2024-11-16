@@ -14,8 +14,14 @@ body {
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
+img {
+  display: block;
+  margin: 0 auto;
+  max-height: 90px;
+}
 
 h1 {
+  margin-top: 0;
   text-align: center;
   font-size: 36px;
 }
